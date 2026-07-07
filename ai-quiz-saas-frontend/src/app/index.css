@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-dark-950 text-slate-200 selection:bg-brand-500/30 selection:text-brand-200 overflow-x-hidden;
+  }
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(5, 5, 14, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.6);
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(15, 12, 27, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.15);
+  transform: translateY(-2px);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-400 via-indigo-300 to-purple-400;
+}
+
+.text-gradient-gold {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500;
+}
+
+.neon-glow {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+}
+
+.neon-glow-active {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+/* Kahoot/Quizizz Animation helpers */
+.quiz-card-enter {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+.quiz-card-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 300ms, transform 300ms;
+}
