@@ -1,6 +1,7 @@
 const pdfParse = require('pdf-parse');
 const fs = require('fs');
 const logger = require('../utils/logger');
+const runOCR = require("../utils/ocr");
 
 /**
  * PDF Extractor Service
@@ -19,19 +20,42 @@ const extractTextFromPDF = async (filePath) => {
     }
 
     const dataBuffer = fs.readFileSync(filePath);
+
     const data = await pdfParse(dataBuffer);
 
-    logger.info(`PDF extracted: ${filePath} | Pages: ${data.numpages} | Chars: ${data.text.length}`);
+    let extractedText = data.text || "";
+
+    logger.info(
+      `PDF extracted using pdf-parse. Characters: ${extractedText.length}`
+    );
+
+    // If pdf-parse found almost no text,
+    // assume it's a scanned PDF.
+    if (extractedText.trim().length < 300) {
+      logger.info("Scanned PDF detected. Running OCR...");
+
+      extractedText = await runOCR(filePath);
+
+      logger.info(
+        `OCR Extraction Complete. Characters: ${extractedText.length}`
+      );
+    }
 
     return {
-      text: data.text,
+      text: extractedText,
       pageCount: data.numpages,
       info: data.info || {},
     };
   } catch (error) {
-    logger.error(`PDF extraction failed for ${filePath}: ${error.message}`);
-    throw new Error(`PDF text extraction failed: ${error.message}`);
-  }
+  console.log("========== OCR ERROR ==========");
+  console.log(error);
+  console.log(error.stack);
+  console.log("===============================");
+
+  logger.error(error);
+
+  throw error;
+}
 };
 
 /**

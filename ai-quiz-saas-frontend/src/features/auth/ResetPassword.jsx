@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Lock,
   Eye,
@@ -14,6 +14,7 @@ import apiClient from "../../services/apiClient";
 export const ResetPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const email = location.state?.email;
   const otp = location.state?.otp;
@@ -68,14 +69,11 @@ export const ResetPassword = () => {
         }
       );
 
-      if (response.data.success) {
-        alert(
-          "Password changed successfully. Please login."
-        );
-
-        navigate("/login");
-      }
-    } catch (err) {
+ if (response.data.success) {
+  setShowSuccessModal(true);
+}
+    } 
+    catch (err) {
       setError(
         err.response?.data?.message ||
           "Unable to reset password."
@@ -246,6 +244,55 @@ export const ResetPassword = () => {
         </div>
 
       </motion.div>
+      <AnimatePresence>
+  {showSuccessModal && (
+    <>
+      {/* Background Blur */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/50 backdrop-blur-md z-40"
+      />
+
+      {/* Success Card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.2 }}
+        className="fixed inset-0 flex items-center justify-center z-50 px-4"
+      >
+        <div className="w-full max-w-md bg-dark-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+
+          <div className="flex justify-center mb-5">
+            <div className="h-16 w-16 rounded-full bg-green-500/10 flex items-center justify-center">
+              <CheckCircle className="text-green-400" size={34} />
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold text-white text-center">
+            Password Updated
+          </h2>
+
+          <p className="text-slate-400 text-center mt-3">
+            Your password has been changed successfully.
+            <br />
+            Please sign in using your new password.
+          </p>
+
+          <button
+            onClick={() => navigate("/login")}
+            className="w-full mt-8 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-dark-950 font-bold transition"
+          >
+            Go to Login
+          </button>
+
+        </div>
+      </motion.div>
+    </>
+  )}
+</AnimatePresence>
 
     </div>
   );

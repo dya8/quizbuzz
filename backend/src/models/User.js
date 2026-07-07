@@ -104,12 +104,11 @@ userSchema.pre('save', async function () {
 // ─── Instance Method: Compare Password ───────────────────────────────────────
 userSchema.methods.comparePassword = async function (candidatePassword) {
 
-  console.log("Entered Password:", candidatePassword);
-  console.log("Stored Hash:", this.password);
+ 
 
   const result = await bcrypt.compare(candidatePassword, this.password);
 
-  console.log("Match:", result);
+  
 
   return result;
 };
