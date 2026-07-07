@@ -304,20 +304,7 @@ EMAIL_PASS=
 
 ---
 
-# Future Enhancements
 
-- Leaderboard
-- Multiplayer Quiz
-- Real-time Quiz Competition
-- AI Personalized Learning Path
-- Voice-based Quiz
-- Mobile Application
-- Adaptive Difficulty
-- Certificate Generation
-- Export Analytics to PDF
-- Email Notifications
-
----
 
 # Screenshots
 
