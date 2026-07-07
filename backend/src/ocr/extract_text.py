@@ -3,11 +3,11 @@ import os
 os.environ["TESSDATA_PREFIX"] = r"C:\Program Files\Tesseract-OCR\tessdata"
 from pdf2image import convert_from_path
 import pytesseract
-
+import platform
 # ----------------------------
 # Tesseract Installation Path
 # ----------------------------
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+#pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 # ----------------------------
 # Poppler Path
@@ -15,16 +15,28 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 # Example:
 # C:\poppler\Library\bin
 # ----------------------------
-POPPLER_PATH = r"C:\poppler\Library\bin"
+if platform.system() == "Windows":
+    POPPLER_PATH = r"C:\poppler\Library\bin"
+    pytesseract.pytesseract.tesseract_cmd = \
+        r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    
+else:
+    POPPLER_PATH = None
 
 def extract_text(pdf_path):
 
     print("Starting OCR...", file=sys.stderr, flush=True)
 
-    pages = convert_from_path(
+    if POPPLER_PATH:
+        pages = convert_from_path(
         pdf_path,
         dpi=300,
         poppler_path=POPPLER_PATH
+    )
+    else:
+        pages = convert_from_path(
+        pdf_path,
+        dpi=300
     )
 
     print(f"Total Pages: {len(pages)}", file=sys.stderr, flush=True)

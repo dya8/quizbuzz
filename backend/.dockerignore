@@ -1,0 +1,10 @@
+node_modules
+.git
+logs
+uploads
+*.log
+npm-debug.log
+.env
+Dockerfile
+docker-compose.yml
+faiss_index
