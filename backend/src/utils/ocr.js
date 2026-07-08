@@ -12,8 +12,9 @@ function runOCR(pdfPath) {
     console.log("Running OCR...");
     console.log("Python Script:", pythonScript);
     console.log("PDF:", pdfPath);
+    const pythonCommand = process.platform === "win32" ? "python" : "python3";
 
-    const python = spawn("python", [pythonScript, pdfPath]);
+    const python = spawn(pythonCommand, [pythonScript, pdfPath]);
 
     let output = "";
     let error = "";
