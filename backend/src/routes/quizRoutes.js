@@ -12,6 +12,7 @@ const {
   getAnalytics,
   getPublishedQuizzes,
   getQuizForAttempt,
+  downloadQuizPDF,
  
 } = require('../controllers/quizController');
 
@@ -38,6 +39,6 @@ router.patch('/:id/publish', protect, isTeacher, publishQuiz);
 router.patch('/:id/unpublish', protect, isTeacher, unpublishQuiz);
 router.delete('/:id', protect, isTeacher, deleteQuiz);
 router.get('/:id/analytics', protect, isTeacher, getAnalytics);
-
+router.get("/:id/pdf", protect, isTeacher, downloadQuizPDF);
 
 module.exports = router;

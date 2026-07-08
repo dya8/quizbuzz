@@ -308,17 +308,31 @@ EMAIL_PASS=
 
 # Screenshots
 
-Add screenshots here:
+## 📸 Screenshots
 
-- Login
-- Teacher Dashboard
-- AI Question Generation
-- Quiz Builder
-- Student Dashboard
-- Quiz Attempt
-- Analytics
-- Results
+### Login
+![Login]()
 
+### Teacher Dashboard
+![Teacher Dashboard](screenshots/teacher-dashboard.png)
+
+### AI Question Generation
+![AI Question Generation](screenshots/ai-question-generation.png)
+
+### Quiz Builder
+![Quiz Builder](screenshots/quiz-builder.png)
+
+### Student Dashboard
+![Student Dashboard](screenshots/student-dashboard.png)
+
+### Quiz Attempt
+![Quiz Attempt](screenshots/quiz-attempt.png)
+
+### Analytics
+![Analytics](screenshots/analytics.png)
+
+### Results
+![Results](screenshots/results.png)
 ---
 
 

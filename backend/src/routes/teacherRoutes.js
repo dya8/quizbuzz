@@ -14,5 +14,4 @@ router.get('/dashboard', protect, isTeacher, getTeacherDashboard);
 
 // Teacher Analytics
 router.get('/analytics', protect, isTeacher, getTeacherAnalytics);
-
 module.exports = router;

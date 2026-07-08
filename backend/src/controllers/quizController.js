@@ -3,6 +3,7 @@ const QuestionBank = require('../models/QuestionBank');
 const Submission = require('../models/Submission');
 const { getQuizAnalytics } = require('../services/analyticsService');
 const { sendSuccess, sendError, sendPaginated } = require('../utils/apiResponse');
+const PDFDocument = require("pdfkit");
 const logger = require('../utils/logger');
 
 // ═══════════════════════════════════════════════════════════════
@@ -556,6 +557,130 @@ const deleteQuiz = async (req, res) => {
     });
   }
 };
+const downloadQuizPDF = async (req, res) => {
+  try {
+    const quiz = await Quiz.findById(req.params.id)
+      .populate("questionIds")
+      .populate("chapterId", "title subject");
+
+    if (!quiz) {
+      return res.status(404).json({
+        success: false,
+        message: "Quiz not found",
+      });
+    }
+
+    const doc = new PDFDocument({
+      margin: 50,
+      size: "A4",
+    });
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${quiz.title}.pdf"`
+    );
+
+    doc.pipe(res);
+
+    // ---------------- Header ----------------
+    doc
+      .font("Helvetica-Bold")
+      .fontSize(22)
+      .text("QUIZBUZZ", { align: "center" });
+
+    doc.moveDown(0.5);
+
+    doc
+      .fontSize(18)
+      .text(quiz.title, { align: "center" });
+
+    doc.moveDown();
+
+    doc
+      .font("Helvetica")
+      .fontSize(12)
+      .text(`Subject : ${quiz.chapterId?.subject || "-"}`);
+
+    doc.text(`Chapter : ${quiz.chapterId?.title || "-"}`);
+    doc.text(`Questions : ${quiz.questionIds.length}`);
+    doc.text(`Generated : ${new Date().toLocaleString()}`);
+
+    doc.moveDown();
+
+    doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
+
+    doc.moveDown();
+
+    // ---------------- Questions ----------------
+
+    quiz.questionIds.forEach((question, index) => {
+
+      // New page if remaining space is low
+      if (doc.y > 720) {
+        doc.addPage();
+      }
+
+      doc
+        .font("Helvetica-Bold")
+        .fontSize(13)
+        .fillColor("black")
+        .text(`Q${index + 1}. ${question.question}`);
+
+      doc.moveDown(0.4);
+
+      question.options.forEach((option, i) => {
+        const letter = String.fromCharCode(65 + i);
+
+        doc
+          .font("Helvetica")
+          .fontSize(12)
+          .text(`${letter}. ${option}`);
+      });
+
+      doc.moveDown();
+
+      doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke();
+
+      doc.moveDown();
+    });
+
+    // ==========================
+    // Answer Key (LAST PAGE)
+    // ==========================
+
+    doc.addPage();
+
+    doc
+      .font("Helvetica-Bold")
+      .fontSize(22)
+      .fillColor("black")
+      .text("ANSWER KEY", {
+        align: "center",
+      });
+
+    doc.moveDown(2);
+
+    quiz.questionIds.forEach((question, index) => {
+      doc
+        .font("Helvetica")
+        .fontSize(14)
+        .text(
+          `Q${String(index + 1).padEnd(3)} → ${question.correctAnswer}`
+        );
+    });
+
+    doc.end();
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to generate PDF",
+    });
+  }
+};
 
 module.exports = {
   createQuiz,
@@ -570,5 +695,7 @@ module.exports = {
   getQuizForAttempt,
   getTeacherDashboard,
   getTeacherAnalytics,
+  downloadQuizPDF,
+  
   
 };

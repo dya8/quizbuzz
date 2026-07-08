@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGetQuizzes, usePublishQuiz } from './useQuizQueries';
-import { Library, PlusCircle, CheckCircle, ExternalLink, Calendar, Copy, Clock } from 'lucide-react';
+import { Library, PlusCircle, CheckCircle, ExternalLink, Calendar, Copy, Clock,  Download } from 'lucide-react';
 import { Trash2 } from "lucide-react";
 import { useDeleteQuiz } from "./useQuizQueries";
 import { motion, AnimatePresence } from "framer-motion";
@@ -31,6 +31,45 @@ const list = quizzes?.data || [];
   const handleTogglePublish = (quizId, currentStatus) => {
     publishMutation.mutate({ quizId, isPublished: !currentStatus });
   };
+  const downloadPDF = async (quizId, title) => {
+  try {
+    const token = localStorage.getItem("accessToken");
+
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/quizzes/${quizId}/pdf`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to generate PDF");
+    }
+
+    const blob = await response.blob();
+
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${title}.pdf`;
+
+    document.body.appendChild(a);
+    a.click();
+
+    a.remove();
+    window.URL.revokeObjectURL(url);
+    
+
+  } catch (err) {
+    console.error(err);
+    alert("Failed to download PDF.");
+  }
+
+};
  const handleDeleteQuiz = (quizId) => {
   setDeleteQuizId(quizId);
 };
@@ -149,7 +188,13 @@ const cancelDelete = () => {
     >
       {quiz.published ? "Unpublish" : "Publish"}
     </button>
-
+     <button
+  onClick={() => downloadPDF(quiz._id || quiz.id, quiz.title)}
+  className="flex items-center gap-2 px-4 py-2 rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20 transition-all"
+>
+  <Download size={14} />
+  PDF
+</button>
     <button
       onClick={() => handleDeleteQuiz(quiz._id || quiz.id)}
       className="flex items-center gap-2 px-4 py-2 rounded-xl border border-red-500/30 bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-all"
@@ -177,6 +222,7 @@ const cancelDelete = () => {
     ))}
   </div>
 )}
+
 <AnimatePresence>
   {deleteQuizId && (
     <>
