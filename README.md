@@ -306,35 +306,51 @@ EMAIL_PASS=
 
 
 
-# Screenshots
-
 ## 📸 Screenshots
 
 ### Login
-![Login]()
+
+<img width="959" alt="Login" src="https://github.com/user-attachments/assets/66ac86ac-a6cc-4a4a-80d4-2011a47031a5" />
+
+### Register
+
+<img width="959" alt="Register" src="https://github.com/user-attachments/assets/40303d04-2a4d-4053-9e1e-5224b7d5e7bf" />
 
 ### Teacher Dashboard
-![Teacher Dashboard](screenshots/teacher-dashboard.png)
+
+<img width="959" alt="Teacher Dashboard" src="https://github.com/user-attachments/assets/b73fe800-7543-4862-8c9e-58651cdff5bb" />
 
 ### AI Question Generation
-![AI Question Generation](screenshots/ai-question-generation.png)
+
+<img width="956" alt="AI Question Generation" src="https://github.com/user-attachments/assets/ba0f8cc2-df15-49fd-b263-108e781506c3" />
+
+### Question Review
+
+<img width="958" alt="Question Review" src="https://github.com/user-attachments/assets/49a34b89-677a-45ff-bb4e-21c3ae340a33" />
 
 ### Quiz Builder
-![Quiz Builder](screenshots/quiz-builder.png)
+
+<img width="956" alt="Quiz Builder" src="https://github.com/user-attachments/assets/7435179e-7c09-4800-a9cd-37db7ebbce65" />
 
 ### Student Dashboard
-![Student Dashboard](screenshots/student-dashboard.png)
+
+<img width="955" alt="Student Dashboard" src="https://github.com/user-attachments/assets/2b54014f-4b13-4e13-98ee-d2b07000adcf" />
 
 ### Quiz Attempt
-![Quiz Attempt](screenshots/quiz-attempt.png)
+
+<img width="959" alt="Quiz Attempt" src="https://github.com/user-attachments/assets/a11af745-327d-4b88-90d1-d7ff4587c7c9" />
 
 ### Analytics
-![Analytics](screenshots/analytics.png)
+
+<img width="959" alt="Analytics 1" src="https://github.com/user-attachments/assets/0659e137-9ac1-4a75-b442-af4fba798205" />
+
+<img width="959" alt="Analytics 2" src="https://github.com/user-attachments/assets/64db649c-f574-4d6d-854a-00366570224b" />
 
 ### Results
-![Results](screenshots/results.png)
----
 
+<img width="955" alt="Results" src="https://github.com/user-attachments/assets/4b5a08e8-a94a-45f5-a35e-39b2a2a55e11" />
+
+---
 
 
 # License
