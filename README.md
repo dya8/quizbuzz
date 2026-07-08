@@ -345,7 +345,7 @@ EMAIL_PASS=
 
 <img width="959" alt="Analytics 1" src="https://github.com/user-attachments/assets/0659e137-9ac1-4a75-b442-af4fba798205" />
 
-<img width="959" alt="Analytics 2" src="https://github.com/user-attachments/assets/64db649c-f574-4d6d-854a-00366570224b" />
+
 
 ### Results
 
