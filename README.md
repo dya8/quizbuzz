@@ -1,7 +1,7 @@
 # QuizBuzz
 ### AI-Powered Quiz Generation & Learning Platform
 
-QuizBuzz is a full-stack web application that enables teachers to generate quizzes from study materials using AI and allows students to take quizzes, track their performance, and receive personalized learning insights.
+QuizBuzz is a full-stack web application that enables teachers to generate quizzes from study materials using AI, create downloadable worksheet PDFs, and allows students to take quizzes, track their performance, and receive personalized learning insights.
 
 The platform combines **React**, **Node.js**, **MongoDB**, **Gemini AI**, and **Pinecone Vector Database** to create an intelligent assessment system.
 
