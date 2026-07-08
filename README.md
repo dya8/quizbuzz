@@ -328,9 +328,7 @@ EMAIL_PASS=
 
 <img width="958" alt="Question Review" src="https://github.com/user-attachments/assets/49a34b89-677a-45ff-bb4e-21c3ae340a33" />
 
-### Quiz Builder
 
-<img width="956" alt="Quiz Builder" src="https://github.com/user-attachments/assets/7435179e-7c09-4800-a9cd-37db7ebbce65" />
 
 ### Student Dashboard
 
