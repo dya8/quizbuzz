@@ -134,54 +134,6 @@ QuizBuzz
 
 ---
 
-# Database Collections
-
-- Users
-- Chapters
-- QuestionBank
-- Quizzes
-- Submissions
-
----
-
-# Workflow
-
-```
-Teacher Uploads PDF
-          │
-          ▼
-Extract Text
-          │
-          ▼
-Gemini AI Generates Questions
-          │
-          ▼
-Store Embeddings in Pinecone
-          │
-          ▼
-Teacher Reviews Questions
-          │
-          ▼
-Create Quiz
-          │
-          ▼
-Publish Quiz
-          │
-          ▼
-Student Attempts Quiz
-          │
-          ▼
-Automatic Evaluation
-          │
-          ▼
-Store Submission
-          │
-          ▼
-Analytics Dashboard
-```
-
----
-
 # Installation
 
 ## Clone Repository
@@ -251,60 +203,6 @@ PINECONE_INDEX_NAME=
 EMAIL_USER=
 EMAIL_PASS=
 ```
-
----
-
-# API Modules
-
-## Authentication
-
-- Register
-- Login
-- Refresh Token
-- Logout
-- Forgot Password
-- Verify OTP
-- Reset Password
-
----
-
-## Teacher
-
-- Upload Chapter
-- Generate Questions
-- Review Questions
-- Create Quiz
-- Publish Quiz
-- Delete Quiz
-- Dashboard
-- Analytics
-
----
-
-## Student
-
-- Dashboard
-- Browse Quizzes
-- Start Quiz
-- Submit Quiz
-- Results
-- Analytics
-
----
-
-# Security
-
-- JWT Authentication
-- Password Hashing using bcrypt
-- Refresh Tokens
-- Protected Routes
-- Role-based Authorization
-- Input Validation
-- Secure Password Reset using OTP
-
----
-
-
 
 ## 📸 Screenshots
 
